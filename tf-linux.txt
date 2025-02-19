@@ -1,0 +1,27 @@
+note dont install cuda tool kit and cudnn in system wide 
+conda create --name tfgpu310 python==3.10
+pip install --upgrade pip
+pip install tensorflow[and-cuda]
+
+python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+output:
+2025-02-19 10:36:51.420908: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1739943411.429130     404 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1739943411.431553     404 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-02-19 10:36:51.439667: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
+(tfgpu310) danish@DESKTOP-LLVQEK6:~$
+
+python -c "import tensorflow as tf; print('TensorFlow version:', tf.__version__); print('CUDA version:', tf.sysconfig.get_build_info()['cuda_version']); print('cuDNN version:', tf.sysconfig.get_build_info()['cudnn_version'])"
+output:
+2025-02-19 10:36:20.249037: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1739943380.289161     379 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1739943380.300933     379 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-02-19 10:36:20.394781: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+TensorFlow version: 2.18.0
+CUDA version: 12.5.1
+cuDNN version: 9
